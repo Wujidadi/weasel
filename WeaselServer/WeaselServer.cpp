@@ -106,6 +106,30 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
       return 0;
   }
 
+  // 離線維護旗標（dotfiles 的 rime-hold-quit 於離線重建 userdb 期間放置）：
+  // 伺服器結束後，TSF 用戶端連線失敗或 WER 的自動重啟都可能重新拉起本程式，
+  // 與 rime_dict_manager 競逐同一 LevelDB；見旗標即退場，
+  // 僅伺服器常駐模式受約束，/q 等指令動詞不受影響。
+  // 旗標逾 10 分鐘視為腳本意外殘留，自動失效以免輸入法永久無法啟動
+  {
+    auto hold_flag = WeaselUserDataPath() / L".maintenance-hold";
+    WIN32_FILE_ATTRIBUTE_DATA fad;
+    if (GetFileAttributesExW(hold_flag.c_str(), GetFileExInfoStandard, &fad)) {
+      FILETIME now_ft;
+      GetSystemTimeAsFileTime(&now_ft);
+      ULARGE_INTEGER now_u, mtime_u;
+      now_u.LowPart = now_ft.dwLowDateTime;
+      now_u.HighPart = now_ft.dwHighDateTime;
+      mtime_u.LowPart = fad.ftLastWriteTime.dwLowDateTime;
+      mtime_u.HighPart = fad.ftLastWriteTime.dwHighDateTime;
+      // 10 分鐘，FILETIME 的 100ns 單位
+      if (now_u.QuadPart >= mtime_u.QuadPart &&
+          now_u.QuadPart - mtime_u.QuadPart < 600ULL * 10000000ULL) {
+        return 0;
+      }
+    }
+  }
+
   bool check_updates = !wcscmp(L"/update", lpstrCmdLine);
   if (check_updates) {
     WeaselServerApp::check_update();
