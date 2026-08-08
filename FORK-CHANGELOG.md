@@ -3,6 +3,18 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.1 — 2026-08-09
+
+### 行為變更
+
+- 新增離線維護旗標：`%APPDATA%\Rime\.maintenance-hold` 存在且未逾 10 分鐘時，伺服器常駐模式啟動的 WeaselServer 立即退場，`/q` 等指令動詞不受約束。
+  供 dotfiles 的 `rime-hold-quit` 於離線重建 userdb 期間阻擋 TSF 用戶端連線失敗或 WER 自動重啟重新拉起的伺服器，避免與 `rime_dict_manager` 競逐同一 LevelDB（此競態 2026-08-08 於 macOS 端實測會造成 `CURRENT` 指向已刪 MANIFEST 的損壞，Windows 端機制同構）；
+  旗標逾時自動失效，避免腳本意外殘留旗標時輸入法永久無法啟動
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.1`
+
 ## 0.17.4-wujidadi — 2026-08-09
 
 基於上游 master f9203ca（官方 0.17.4 之後的開發版）。首個自建版。
