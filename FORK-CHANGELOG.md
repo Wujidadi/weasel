@@ -19,5 +19,5 @@
 
 ### 基礎設施
 
-- librime 子模組改指自家 fork（Wujidadi/librime）並 pin 至 7a3d9b99（`1.17.0-wujidadi`，含 Windows 資源字串 fork 標記修正）；建置採「librime 於自家倉庫編妥、手動接入產物」路線，不走 `build.bat rime`（其會清空 librime 的建置快取）
+- librime 子模組改指自家 fork（Wujidadi/librime）並 pin 至 9b46caec（`1.17.0-wujidadi`，含 Windows 資源字串 fork 標記、MSVC `/utf-8`、`RIME_DLL` 匯出三項 Windows 建置修正）；建置採「librime 於自家倉庫編妥、手動接入產物」路線，不走 `build.bat rime`（其會清空 librime 的建置快取）
 - 新增 `FORK-POLICY.md` 開發與貢獻規範
