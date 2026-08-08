@@ -15,8 +15,12 @@ if not defined VERSION_PATCH set VERSION_PATCH=4
 if not defined WEASEL_VERSION set WEASEL_VERSION=%VERSION_MAJOR%.%VERSION_MINOR%.%VERSION_PATCH%
 if not defined WEASEL_BUILD set WEASEL_BUILD=0
 
-rem use numeric build version for release build
-set PRODUCT_VERSION=%WEASEL_VERSION%.%WEASEL_BUILD%
+if not defined WEASEL_FORK_SUFFIX set WEASEL_FORK_SUFFIX=-wujidadi
+
+rem fork suffix goes into PRODUCT_VERSION only (resource string and installer name);
+rem WEASEL_VERSION, FILE_VERSION and VERSION_* must stay numeric
+rem (required by RC FILEVERSION and NSIS VIProductVersion)
+set PRODUCT_VERSION=%WEASEL_VERSION%%WEASEL_FORK_SUFFIX%
 rem for non-release build, try to use git commit hash as product build version
 if not defined RELEASE_BUILD (
   rem check if git is installed and available, then get the short commit id of head
@@ -31,7 +35,7 @@ if not defined RELEASE_BUILD (
       set WEASEL_BUILD=%%i
     )
     rem get short commmit id of head
-    for /F %%i in ('git rev-parse --short HEAD') do (set PRODUCT_VERSION=%WEASEL_VERSION%.%WEASEL_BUILD%.%%i)
+    for /F %%i in ('git rev-parse --short HEAD') do (set PRODUCT_VERSION=%WEASEL_VERSION%%WEASEL_FORK_SUFFIX%.%WEASEL_BUILD%.%%i)
   )
 )
 
