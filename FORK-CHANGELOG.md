@@ -3,6 +3,19 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.2 — 2026-08-09
+
+### 修正
+
+- WeaselIPC 客戶端 IPC 改為 fail-fast 帶兩級逾時，修正 TSF 焦點切換時在宿主程式 UI 執行緒上同步等待 WeaselServer 造成整個視窗凍結 7～8 秒的問題。
+  組字／按鍵路徑逾時 500ms 確保按鍵不被誤放；焦點／通知路徑逾時 25ms，漏掉一次下次自動補上，視窗切換肉眼無感；
+  失敗經既有 catch(DWORD) 安靜降級（該次按鍵放行、下次自動重連），伺服器端呼叫以 timeout_ms 預設 INFINITE 維持原行為
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.2`
+- appcast 條目更新至 `0.17.4-wujidadi.2`（`.1` 發布時未及更新，一併補上）
+
 ## 0.17.4-wujidadi.1 — 2026-08-09
 
 ### 行為變更
