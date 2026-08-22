@@ -3,6 +3,22 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.4 — 2026-08-22
+
+### 修正
+
+- 自上游 PR rime/weasel#1914 分支揀回四筆修正，使 fork 與 PR 內容一致：
+  - `_Send()` 重連後改用新控制代碼重送
+  - 托盤刷新改於專用執行緒執行，補上 #1912 未涵蓋的殘餘死結窗口（管線工作執行緒跨執行緒 `SetWindowPos` 等訊息執行緒，而訊息執行緒卡在 `Shell_NotifyIcon`），並移除 `_RefreshTrayIcon()` 對 explorer.exe 的延遲繞道
+  - 托盤狀態加鎖，避免托盤執行緒與訊息執行緒競態
+  - 管線 I/O 錯誤處理補強：`CreateEvent` 失敗即拋出、`_WaitIo()` 保留原始錯誤碼、`_ConnectServerPipe()` 檢查等待結果；
+    `_Receive()` 失敗（含逾時）即關閉客戶端連線，修正 `.2` 起逾時後遲到的回應會被當成下一筆請求回應的錯位問題
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.4`
+- appcast 條目更新至 `0.17.4-wujidadi.4`
+
 ## 0.17.4-wujidadi.3 — 2026-08-22
 
 ### 合併上游
