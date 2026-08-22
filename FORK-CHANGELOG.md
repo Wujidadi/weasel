@@ -3,6 +3,20 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.3 — 2026-08-22
+
+### 合併上游
+
+- 合入 rime/weasel master 至 `d73f629`，含 #1912「托盤刷新改於伺服器訊息執行緒執行、不再持 `g_api_mutex` 呼叫 `Shell_NotifyIcon`」，
+  斷開「explorer 工作列執行緒等管線回應 ↔ WeaselServer 管線工作執行緒等工作列處理 `Shell_NotifyIcon`」的死結環（#1909 伺服器端根因）；
+  本 fork 的客戶端有界逾時修補保留，兩者互補
+- 上游 `weasel.props.template` 已自帶版本巨集定義，移除本 fork 重複的那行
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.3`
+- appcast 條目更新至 `0.17.4-wujidadi.3`
+
 ## 0.17.4-wujidadi.2 — 2026-08-09
 
 ### 修正
