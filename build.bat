@@ -15,7 +15,7 @@ if not defined VERSION_PATCH set VERSION_PATCH=4
 if not defined WEASEL_VERSION set WEASEL_VERSION=%VERSION_MAJOR%.%VERSION_MINOR%.%VERSION_PATCH%
 if not defined WEASEL_BUILD set WEASEL_BUILD=0
 
-if not defined WEASEL_FORK_SUFFIX set WEASEL_FORK_SUFFIX=-wujidadi.4
+if not defined WEASEL_FORK_SUFFIX set WEASEL_FORK_SUFFIX=-wujidadi.5
 
 rem fork suffix goes into PRODUCT_VERSION only (resource string and installer name);
 rem WEASEL_VERSION, FILE_VERSION and VERSION_* must stay numeric

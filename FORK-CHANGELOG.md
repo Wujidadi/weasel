@@ -3,6 +3,20 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.5 — 2026-08-25
+
+### librime 更新
+
+- librime 子模組 pin 自 `9b46caec` 更新至 `c7d525ed`（librime fork 2026-08-25 合併上游後的端點），重編 x64／Win32 產物接入，涵蓋四筆上游提交：
+  - `8dc90354` 修正 stabledb（custom_phrase.txt）無權重詞條被 dee 門檻誤丟的回歸（`de21e7d4` 引入），custom_phrase 自此可安全啟用
+  - `417db238` custom_phrase 測試改寫，不再依賴 TableTranslator
+  - `4cacd155`／`4901c8a4` 新增 CandidatePreview API 並露出至 C 前端；本 fork 前端未採用，僅隨庫帶入
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.5`
+- appcast 條目更新至 `0.17.4-wujidadi.5`
+
 ## 0.17.4-wujidadi.4 — 2026-08-22
 
 ### 修正
