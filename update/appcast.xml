@@ -6,11 +6,11 @@
     <description>小狼毫自建版（Wujidadi fork）Appcast 更新頻道</description>
     <language>zh</language>
     <item>
-      <title>小狼毫 0.17.4-wujidadi.5</title>
+      <title>小狼毫 0.17.4-wujidadi.6</title>
       <sparkle:releaseNotesLink>https://github.com/Wujidadi/weasel/blob/master/FORK-CHANGELOG.md</sparkle:releaseNotesLink>
-      <pubDate>Tue, 25 Aug 2026 19:21:28 +0800</pubDate>
-      <enclosure url="https://github.com/Wujidadi/weasel/releases/download/0.17.4-wujidadi.5/weasel-0.17.4-wujidadi.5-installer.exe"
-                 sparkle:version="0.17.4-wujidadi.5"
+      <pubDate>Wed, 23 Sep 2026 12:03:32 +0800</pubDate>
+      <enclosure url="https://github.com/Wujidadi/weasel/releases/download/0.17.4-wujidadi.6/weasel-0.17.4-wujidadi.6-installer.exe"
+                 sparkle:version="0.17.4-wujidadi.6"
                  type="application/octet-stream"/>
     </item>
   </channel>

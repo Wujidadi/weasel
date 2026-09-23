@@ -3,6 +3,22 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.6 — 2026-09-23
+
+### librime 更新
+
+- librime 子模組 pin 自 `c7d525ed` 更新至 `37e47f86`（librime fork `1.17.0-wujidadi.1`，基於上游 `ef1a16aa`），重編 x64／Win32 產物接入：
+  - userdb 詞條老化丟棄門檻改為設定項 `<ns>/user_dict_forget_threshold`（double，與 `enable_user_dict` 同層）；
+    上游 `de21e7d4` 的常量門檻 `1e-200` 會把落後庫級 tick 約 92103 的詞條整條丟棄，舊版合併語義蓋成 `max_tick` 的整批詞條跨過門檻時一次全部失效、候選退回字典表順序；
+    fork 預設 `0` 代表不遺忘，設為 `1e-200` 即恢復上游行為，不必重編
+  - opencc 子模組升 `ver.1.4.2`（上游 `2479df58`），`output\data\opencc\` 隨之更新
+  - 區間另含上游 streaming_chord、calculus、prism 等功能提交，本 fork 前端未採用，僅隨庫帶入
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.6`
+- appcast 條目更新至 `0.17.4-wujidadi.6`
+
 ## 0.17.4-wujidadi.5 — 2026-08-25
 
 ### librime 更新
