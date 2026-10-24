@@ -3,6 +3,26 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.7 — 2026-10-24
+
+### 上游同步
+
+- 合併上游 master 至 `82b50c9`（含候選視窗改以 DirectComposition 重寫、設定與部署對話框 DPI 感知、字型設定對話框、WeaselDeployer 命令列字典管理、診斷日誌改由登錄等級控管），均屬上游內容、不另記於本檔
+- 衝突解法：
+  - `WeaselServerApp.cpp` 取上游的啟動日誌，不採上游的 `SetTrayRefreshCallback`，托盤刷新維持 fork 的專用執行緒機制（`c7e6acb`）
+  - `PipeChannel.h` 寫入失敗重連後的重試保留 fork 版：解參照新管線控制代碼並沿用逾時參數
+
+### librime 更新
+
+- librime 子模組 pin 自 `37e47f86` 更新至 `fa2dadb6`（librime fork `1.17.0-wujidadi.2`，基於上游 `1b3417d2`），重編 x64／Win32 產物接入：
+  上游帶進 C++20 支援、依執行期條件啟用元件與 `streaming_chord` 修正；fork 的 macOS 部署目標調整不影響 Windows；
+  `fa2dadb6` 修正合併後 `UserDbValue` 重複 `RIME_DLL` 標記造成的 MSVC C2487 編譯失敗
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.7`
+- appcast 條目更新至 `0.17.4-wujidadi.7`
+
 ## 0.17.4-wujidadi.6 — 2026-09-23
 
 ### librime 更新
