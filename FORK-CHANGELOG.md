@@ -3,6 +3,24 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.8 — 2026-11-02
+
+### 上游同步
+
+- 合併上游 master 至 `f96ed24`（安裝與升級時保留 Windows 語言設定、遷移舊版 Weasel 輸入法設定檔），均屬上游內容、不另記於本檔
+
+### librime 更新
+
+- librime 子模組 pin 自 `fa2dadb6` 更新至 `028dd582`（librime fork `1.17.0-wujidadi.3`，基於上游 `56737cd2`），重編 x64／Win32 產物接入：
+  - 輸入中的 Shift 切換臨時西文一律不上屏，`express_editor` 的右 Shift 除外；右 Shift 確認的中文留在編輯區，之後按 Return／空白上屏組字結果
+  - 數字鍵盤 Enter（`KP_Enter`）在輸入中比照主鍵盤 Return 處理，含 Shift、Control 組合；`WeaselTSF/KeyEvent.cpp` 原本即把帶延伸旗標的 `VK_RETURN` 送成 `ibus::KP_Enter`，weasel 原始碼不需修改
+  - `deps/leveldb`、`deps/yaml-cpp`、`deps/googletest` 子模組隨 librime 更新，新版 leveldb 可直接沿用既有 userdb
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.8`
+- appcast 條目更新至 `0.17.4-wujidadi.8`
+
 ## 0.17.4-wujidadi.7 — 2026-10-24
 
 ### 上游同步
