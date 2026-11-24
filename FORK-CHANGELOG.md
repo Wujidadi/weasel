@@ -3,6 +3,20 @@
 本檔記錄本 fork（Wujidadi/weasel）相對上游 rime/weasel 的所有變動，依自建版版號分節。
 上游自身的變更見 `CHANGELOG.md`；分支與版號規範見 `FORK-POLICY.md`。
 
+## 0.17.4-wujidadi.9 — 2026-11-24
+
+### 修正
+
+- 托盤視窗、訊息迴圈與選單改由托盤執行緒擁有，移除 `.4` 引入的跨執行緒托盤鎖 `m_tray_mutex`（`5480284`）：
+  - 起因：selcomad77 於 2026-11-16 在 rime/weasel#1914 以隔離驗證指出，托盤執行緒持鎖卡在 `Shell_NotifyIcon` 時，訊息執行緒處理托盤通知會等同一把鎖，Shell 等待仍會傳回訊息執行緒
+  - 所有 `CSystemTray` 操作改在托盤執行緒串行處理，訊息執行緒只以 `PostMessage` 送出刷新與結束請求
+  - 托盤選單改以 `TPM_RETURNCMD` 由托盤視窗擁有，選擇結果以 `PostMessage(WM_COMMAND)` 轉交伺服器主視窗
+
+### 版號
+
+- fork 版號後綴進位 `-wujidadi.9`
+- appcast 條目更新至 `0.17.4-wujidadi.9`
+
 ## 0.17.4-wujidadi.8 — 2026-11-02
 
 ### 上游同步
